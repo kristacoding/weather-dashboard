@@ -53,6 +53,7 @@ $(function () {
     }
 
     function fiveDayForecast(searchCity) {
+
         console.log(searchCity);
 
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&appid=0c7291aca640c07cf04da224af9c3247&units=imperial";
@@ -66,13 +67,15 @@ $(function () {
             .then(function (response) {
                 var dayStart = 0;
 
-                //iterate through the 40 weather data sets
                 for (var i = 0; i < response.list.length; i++) {
 
-                    //split function to isolate the time from the time/data aspect of weather data, and only select weather reports for 3pm
+                    //select weather reports for 3pm
                     if (response.list[i].dt_txt.split(" ")[1] == "15:00:00") {
 
-                        //if time of report is 3pm, populate text areas accordingly
+                        var fiveDayRow = $("<row>");
+                        fiveDayRow.addClass("col-md-2");
+                        $("#forecast").append(fiveDayRow);
+
                         var day = response.list[i].dt_txt.split("-")[2].split(" ")[0];
                         console.log(day);
                         var month = response.list[i].dt_txt.split("-")[1];
@@ -82,14 +85,14 @@ $(function () {
 
                         var fullDateInfo = $("<div>").text(month + "/" + day + "/" + year);
                         console.log(fullDateInfo);
-                        $("#forecast").append(fullDateInfo);
+                        fiveDayRow.append(fullDateInfo);
 
                         var fiveDayIcon = response.list[i].weather[0].icon
                         console.log(response.list[i].weather[0].icon);
-        
+
                         var fiveDayIconLink = "http://openweathermap.org/img/w/" + fiveDayIcon + ".png";
                         console.log(fiveDayIconLink);
-        
+
                         var fiveDayWeatherImage = $("<img>");
                         fiveDayWeatherImage.attr("src", fiveDayIconLink);
 
@@ -97,17 +100,15 @@ $(function () {
 
                         var fiveDayTemp = $("<p>").text("Temp: " + response.list[i].main.temp + "°F");
                         fullDateInfo.append(fiveDayTemp);
-                        
-                        var fiveDayHumidity = $("<p>").text("Humidity: " + response.list[i].main.humidity);
-                        fiveDayTemp.append(fiveDayHumidity); 
+
+                        var fiveDayHumidity = $("<p>").text("Humidity: " + response.list[i].main.humidity + "%");
+                        fiveDayTemp.append(fiveDayHumidity);
 
                         dayStart++;
-
-
-                    };
-
+                    }
+  
                 }
-
             });
     }
-});    
+});
+
