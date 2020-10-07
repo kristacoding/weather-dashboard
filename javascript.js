@@ -71,22 +71,22 @@ $(function () {
                 })
                     .then(function (response) {
 
-                       var numberId = parseInt(response.value);
-                       var uvId = $("<p>").text("UV ID: " + numberId);
+                      
+                       var uvId = $("<p>").text("UV ID: " + response.value);
                        $("#currentCity").append(uvId);
 
-                        console.log(numberId);
+                        console.log(uvId);
 
-                        if (numberId < 3) {
-                            numberId.addClass("favorable");
-
-                        }
-                        else if (numberId > 3 && numberId < 5) {
-                            numberId.addClass("moderate");
+                        if (uvId < 3) {
+                            uvId.addClass("favorable");
 
                         }
-                        else if (numberId > 5) {
-                            numberId.addClass("severe");
+                        else if (uvID > 3 && uvID < 5) {
+                            uvID.addClass("moderate");
+
+                        }
+                        else if (uvID > 5) {
+                            uvID.addClass("severe");
 
                         }
 
