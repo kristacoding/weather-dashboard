@@ -54,7 +54,7 @@ $(function () {
 
                 $("#currentCity").append(humidity);
 
-                var windSpeed = $("<p>").text("Wind Speend: " + response.wind.speed + "MPH");
+                var windSpeed = $("<p>").text("Wind Speed: " + response.wind.speed + "MPH");
 
                 $("#currentCity").append(windSpeed);
 
@@ -71,10 +71,28 @@ $(function () {
                 })
                     .then(function (response) {
 
-                        var uvId = $("<p>").addClass("card-text").text("UV ID: " + response.value);
-                        console.log(response.value);
+                       var numberId = parseInt(response.value);
+                       var uvId = $("<p>").text("UV ID: " + numberId);
+                       $("#currentCity").append(uvId);
 
-                        $("#currentCity").append(uvId);
+                        console.log(numberId);
+
+                        if (numberId < 3) {
+                            numberId.addClass("favorable");
+
+                        }
+                        else if (numberId > 3 && numberId < 5) {
+                            numberId.addClass("moderate");
+
+                        }
+                        else if (numberId > 5) {
+                            numberId.addClass("severe");
+
+                        }
+
+                        else {};
+
+                        
 
 
                     })
@@ -111,7 +129,7 @@ $(function () {
                         console.log(year);
 
                         var fullDateInfo = $("<div>").text(month + "/" + day + "/" + year);
-                        fullDateInfo.addClass("card-title");
+                        fullDateInfo.addClass("forecast");
                         console.log(fullDateInfo);
                         newRow.append(fullDateInfo);
 
@@ -151,13 +169,14 @@ $(function () {
 
     }
 
-    $(".history").on("click", "li", function () {
+    $(".history").on("click", "button", function () {
         var city = $(this).text().trim();
         searchWeather(city)
     })
 
     function historyRow(text) {
-        var listitem = $("<li>").text(text);
+        var listitem = $("<button>").text(text);
+        listitem.addClass("btn btn-outline-danger");
         $(".history").append(listitem);
     }
 

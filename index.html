@@ -9,12 +9,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="style.css" />
 
     <title>Weather Dashboard</title>
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
+    <div class= "jumbotron">
         <div class="container">
             <center>
                 <h1 class="display-4">Weather Dashboard</h1>
@@ -27,22 +29,20 @@
 
     <div class="container">
         <div class="row">
-            <aside class="col-lg-3 bg-light">
-                <h5>Search City</h5>
+            <aside class="col-lg-3">
+                <h4>Search City</h4>
                 <div class="input-group mb-3">
-                    <input id="searchCity" type="text" placeholder="Enter City" class="input-group-append"></input>
-                    <button id="searchBtn" class="btn btn-outline-success">Search</button>
+                    <textarea id="searchCity" type="text" placeholder="Enter City" class="input-group-append"></textarea>
+                    <button id="searchBtn" class="btn btn-outline-danger">Search</button>
                 </div>
                 <ul class="list-group history">
                 </ul>
             </aside>
 
-
             <div class="col-lg-9">
                 <!--Current City Div-->
                 <div class="row">
                     <div id="currentCity">
-                        <p>Current City</p>
                     </div>
                 </div>
 
